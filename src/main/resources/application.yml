@@ -1,0 +1,43 @@
+application:
+  keycloak-base-url: ${KEYCLOAK_BASE_URL} #for local environment set KEYCLOAK_BASE_URL to http://localhost:8080
+  realm: ${REALM} #for local environment set REALM to nba_app
+spring:
+  main:
+    allow-circular-references: true
+  application:
+    name: InJobBack
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_AUTH_URL}
+jwt:
+  auth:
+    converter:
+      resource-id: spring_client
+      principal-attribute: preferred_username
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        web: ERROR
+        security: DEBUG
+      hibernate: ERROR
+server:
+  port: ${SERVER_PORT}
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10000MB
+      max-request-size: 10000MB
+    context-path: /back/api
+springdoc:
+  api-docs:
+    groups:
+      enabled: true
+    enabled: true # Disabling the /api-docs enpoint
+  show-actuator: true
+  oAuthFlow:
+    tokenUrl: ${KEYCLOAK_AUTH_URL}/protocol/openid-connect/token
+    use-pkce-with-authorization-code-grant: true
