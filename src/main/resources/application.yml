@@ -1,7 +1,16 @@
 application:
-  keycloak-base-url: ${KEYCLOAK_BASE_URL} #for local environment set KEYCLOAK_BASE_URL to http://localhost:8080
-  realm: ${REALM} #for local environment set REALM to nba_app
+  swagger:
+    title: INJOB API DESCRIPTION
+    description: "Injob  Api"
+    url: http://localhost:8081/back/api
+  keycloak-base-url: ${KEYCLOAK_BASE_URL}
+  realm: ${REALM}
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10000MB
+      max-request-size: 10000MB
   main:
     allow-circular-references: true
   application:
@@ -10,12 +19,23 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${KEYCLOAK_AUTH_URL}
+          issuer-uri: ${KEYCLOAK_BASE_URL}/realms/${REALM}
+  datasource:
+    username: root
+    url: jdbc:postgresql://localhost:5433/injobdb
+    password: azerty
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
 jwt:
   auth:
     converter:
       resource-id: spring_client
       principal-attribute: preferred_username
+
 logging:
   level:
     root: INFO
@@ -24,20 +44,26 @@ logging:
         web: ERROR
         security: DEBUG
       hibernate: ERROR
+
 server:
   port: ${SERVER_PORT}
   servlet:
     multipart:
       enabled: true
-      max-file-size: 10000MB
-      max-request-size: 10000MB
+      max-file-size: 10GB # Adjust the file size limit as needed
+      max-request-size: 10GB
     context-path: /back/api
 springdoc:
   api-docs:
     groups:
       enabled: true
-    enabled: true # Disabling the /api-docs enpoint
+    enabled: true
   show-actuator: true
+  swagger-ui:
+    enabled: true
+    defaultModelsExpandDepth: -1
+    operationsSorter: method
+  disable-swagger-default-url: true
   oAuthFlow:
-    tokenUrl: ${KEYCLOAK_AUTH_URL}/protocol/openid-connect/token
+    tokenUrl: ${KEYCLOAK_BASE_URL}/realms/${REALM}/protocol/openid-connect/token
     use-pkce-with-authorization-code-grant: true
