@@ -57,13 +57,17 @@ springdoc:
   api-docs:
     groups:
       enabled: true
-    enabled: true
+    enabled: true # Disabling the /api-docs enpoint
   show-actuator: true
   swagger-ui:
-    enabled: true
+    enabled: true # Disabling the /swagger-api enpoint
     defaultModelsExpandDepth: -1
     operationsSorter: method
-  disable-swagger-default-url: true
+    oauth:
+      clientId: spring_client
+      clientSecret:
+      grant-type: client_credentials
+    disable-swagger-default-url: true
   oAuthFlow:
-    tokenUrl: ${KEYCLOAK_BASE_URL}/realms/${REALM}/protocol/openid-connect/token
+    tokenUrl: ${KEYCLOAK_AUTH_URL}/protocol/openid-connect/token
     use-pkce-with-authorization-code-grant: true

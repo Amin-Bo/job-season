@@ -29,24 +29,29 @@ class SecurityConfig {
     private final ObjectMapper mapper;
     private static final String[] SWAGGER_WHITELIST = {
             "/v3/api-docs/**",
+            "/v3/api-docs",
+            "/v3/api-docs.yml",
+            "/v3/api-docs/mobile",
             "/v3/api-docs2/**",
             "/api-docs/**",
             "/api-docs2/**",
             "/swagger-ui/**",
-            "/swagger-ui.html/**",
+            "/swagger-ui.html",
             "/swagger-resources/**",
             "/webjars/**",
             "/version/**"
-
     };
+
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)  {
 
         try {
             log.info("HTTP SECURITY " + http);
-            http.
-                    authorizeHttpRequests()
+            log.info("Configuring security filters...");
+
+            http.authorizeHttpRequests()
                     .requestMatchers(SWAGGER_WHITELIST).permitAll()
                     .anyRequest()
                     .permitAll();
