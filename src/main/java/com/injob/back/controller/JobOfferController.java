@@ -2,6 +2,7 @@ package com.injob.back.controller;
 
 import com.injob.back.dto.JobOfferDto;
 import com.injob.back.model.JobOffer;
+import com.injob.back.roles.hasAdminRole;
 import com.injob.back.service.JobOfferService;
 import com.injob.back.service.impl.JobOfferServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,6 +25,7 @@ public class JobOfferController {
 
 
     @PostMapping
+    @hasAdminRole
     public ResponseEntity<JobOfferDto> addJobOffer(@RequestBody JobOfferDto jobOffer) {
         JobOfferDto addedJobOffer = jobOfferService.addJobOffer(jobOffer);
 
@@ -39,12 +41,15 @@ public class JobOfferController {
     }
 
     @PutMapping("/{jobId}")
+    @hasAdminRole
+
     public ResponseEntity<JobOfferDto> updateJobOffer(
             @PathVariable Long jobId,
             @RequestBody JobOfferDto jobOffer) {
         return   new ResponseEntity<>(jobOfferService.updateJobOffer(jobId,jobOffer),HttpStatus.ACCEPTED);
     }
     @DeleteMapping("/{jobId}")
+    @hasAdminRole
     public ResponseEntity<Void> deleteJobOffer(@PathVariable Long jobId) {
         jobOfferService.deleteJobOffer(jobId);
         return ResponseEntity.noContent().build();

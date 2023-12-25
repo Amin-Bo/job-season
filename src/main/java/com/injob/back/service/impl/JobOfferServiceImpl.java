@@ -77,7 +77,7 @@ public class JobOfferServiceImpl implements JobOfferService {
 
     public JobOfferDto getJobOfferById(Long jobId) {
         Optional<JobOffer> optionalJobOffer = jobOfferRepository.findById(jobId);
-        JobOffer jobOffer = optionalJobOffer.orElseThrow(() -> new EntityNotFoundException("JobOffer not found with ID: " + jobId));
+        JobOffer jobOffer = optionalJobOffer.orElseThrow(() -> new IllegalArgumentException("JobOffer not found with ID: " + jobId));
 
         return jobOfferMapper.jobOfferToDto(jobOffer);
     }

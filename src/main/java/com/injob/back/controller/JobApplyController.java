@@ -4,6 +4,7 @@ import com.injob.back.dto.JobApplyDto;
 import com.injob.back.enums.JobApplyStatusEnum;
 import com.injob.back.model.JobApply;
 import com.injob.back.roles.hasAdminRole;
+import com.injob.back.roles.hasUserRole;
 import com.injob.back.service.JobApplyService;
 import com.injob.back.service.impl.JobApplyServiceImpl;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -23,6 +24,7 @@ public class JobApplyController {
     private final JobApplyServiceImpl jobApplyService;
 
     @PostMapping("/add/{jobOfferId}")
+    @hasUserRole
     public ResponseEntity<JobApplyDto> addJobApply( @PathVariable Long jobOfferId) {
             JobApplyDto addedJobApply = jobApplyService.addJobApply( jobOfferId);
             return new ResponseEntity<>(addedJobApply, HttpStatus.CREATED);

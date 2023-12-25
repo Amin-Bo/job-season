@@ -27,5 +27,5 @@ public class JobOfferDto {
     private String  dateDebut;
 
     @JsonProperty("type")
-    private String offerType;
+    private JobOfferTypeEnum offerType;
 }

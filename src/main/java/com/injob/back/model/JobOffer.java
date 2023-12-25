@@ -24,7 +24,6 @@ public class JobOffer {
     @Column(nullable = false)
     private String description;
 
-
     @Column(name = "date_publication", nullable = false)
     private LocalDateTime datePublication;
 
