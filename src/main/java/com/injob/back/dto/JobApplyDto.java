@@ -1,7 +1,7 @@
 package com.injob.back.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.injob.back.enums.JobApplyStatusEnum;
+import com.injob.back.enums.StatusEnum;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 public class JobApplyDto {
 
     private Long id;
-    private JobApplyStatusEnum status= JobApplyStatusEnum.PENDING;
+    private StatusEnum status= StatusEnum.PENDING;
     private String email;
     private String jobDescription;
 

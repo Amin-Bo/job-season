@@ -1,7 +1,7 @@
 package com.injob.back.service.impl;
 
 import com.injob.back.dto.JobApplyDto;
-import com.injob.back.enums.JobApplyStatusEnum;
+import com.injob.back.enums.StatusEnum;
 import com.injob.back.mapper.JobApplyMapper;
 import com.injob.back.model.JobApply;
 import com.injob.back.model.JobOffer;
@@ -34,7 +34,7 @@ public class JobApplyServiceImpl {
             JobApply jobApply= new  JobApply();
             // Set the JobOffer in the JobApply
             jobApply.setJobOffer(jobOffer);
-            jobApply.setStatus(JobApplyStatusEnum.PENDING);
+            jobApply.setStatus(StatusEnum.PENDING);
             String jobSeekerEmail = AuthenticationUtils.getEmailFromCurrentAuthentication();
             jobApply.setEmail(jobSeekerEmail);
             jobApply.setDateEnvoi(LocalDateTime.now());
@@ -51,7 +51,7 @@ public class JobApplyServiceImpl {
             throw new IllegalArgumentException("JobOffer with ID " + jobOfferId + " not found.");
         }
     }
-    public JobApplyDto updateJobApplyStatus(Long jobApplyId, JobApplyStatusEnum newStatus) {
+    public JobApplyDto updateJobApplyStatus(Long jobApplyId, StatusEnum newStatus) {
         // Retrieve the JobApply from the database
         Optional<JobApply> optionalJobApply = jobApplyRepository.findById(jobApplyId);
         if (optionalJobApply.isPresent()) {
@@ -90,5 +90,7 @@ public class JobApplyServiceImpl {
                 .map(jobApplyMapper::jobApplyToDto)
                 .collect(Collectors.toList());
     }
+
+
 
 }

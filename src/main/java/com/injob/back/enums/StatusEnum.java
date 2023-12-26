@@ -1,13 +1,13 @@
 package com.injob.back.enums;
 
-public enum JobApplyStatusEnum {
+public enum StatusEnum {
     ACCEPTED("Accepté"),
     PENDING("En attente"),
     REJECTED("Rejeté");
 
     private final String value;
 
-    JobApplyStatusEnum(String value) {
+    StatusEnum(String value) {
         this.value = value;
     }
 

@@ -1,11 +1,9 @@
 package com.injob.back.controller;
 
 import com.injob.back.dto.JobApplyDto;
-import com.injob.back.enums.JobApplyStatusEnum;
-import com.injob.back.model.JobApply;
+import com.injob.back.enums.StatusEnum;
 import com.injob.back.roles.hasAdminRole;
 import com.injob.back.roles.hasUserRole;
-import com.injob.back.service.JobApplyService;
 import com.injob.back.service.impl.JobApplyServiceImpl;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
@@ -19,7 +17,6 @@ import java.util.List;
 @RequestMapping("/jobapplies")
 @AllArgsConstructor
 @SecurityRequirement(name = "basicAuth")
-
 public class JobApplyController {
     private final JobApplyServiceImpl jobApplyService;
 
@@ -34,7 +31,7 @@ public class JobApplyController {
     @hasAdminRole
     public ResponseEntity<JobApplyDto> updateJobApplyStatus(
             @PathVariable Long jobApplyId,
-            @RequestParam JobApplyStatusEnum newStatus) {
+            @RequestParam StatusEnum newStatus) {
 
             JobApplyDto updatedJobApply = jobApplyService.updateJobApplyStatus(jobApplyId, newStatus);
             return ResponseEntity.ok(updatedJobApply);

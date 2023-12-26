@@ -1,6 +1,6 @@
 package com.injob.back.model;
 
-import com.injob.back.enums.JobApplyStatusEnum;
+import com.injob.back.enums.StatusEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,7 +20,7 @@ public class JobApply {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private JobApplyStatusEnum status;
+    private StatusEnum status;
 
     @Column(nullable = false)
     private String email;
