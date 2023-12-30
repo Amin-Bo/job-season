@@ -2,8 +2,8 @@ package com.injob.back.controller;
 
 import com.injob.back.dto.JobApplyDto;
 import com.injob.back.enums.StatusEnum;
-import com.injob.back.roles.hasAdminRole;
-import com.injob.back.roles.hasUserRole;
+import com.injob.back.security.roles.hasAdminRole;
+import com.injob.back.security.roles.hasUserRole;
 import com.injob.back.service.impl.JobApplyServiceImpl;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;

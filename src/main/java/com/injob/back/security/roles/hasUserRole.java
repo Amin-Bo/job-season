@@ -1,4 +1,4 @@
-package com.injob.back.roles;
+package com.injob.back.security.roles;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 

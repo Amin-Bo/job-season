@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "job_apply")
@@ -27,4 +28,7 @@ public class JobApply {
 
     @Column(name = "date_envoi", nullable = false)
     private LocalDateTime dateEnvoi;
+
+    @OneToMany(mappedBy = "jobApply", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Interview> interviews;
 }

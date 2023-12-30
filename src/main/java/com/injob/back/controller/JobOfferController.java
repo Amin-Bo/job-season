@@ -1,11 +1,8 @@
 package com.injob.back.controller;
 
 import com.injob.back.dto.JobOfferDto;
-import com.injob.back.model.JobOffer;
-import com.injob.back.roles.hasAdminRole;
-import com.injob.back.service.JobOfferService;
+import com.injob.back.security.roles.hasAdminRole;
 import com.injob.back.service.impl.JobOfferServiceImpl;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +37,7 @@ public class JobOfferController {
         return new ResponseEntity<>(jobOfferList, HttpStatus.OK);
     }
 
-    @PutMapping("/{jobId}")
+    @PatchMapping("/{jobId}")
     @hasAdminRole
 
     public ResponseEntity<JobOfferDto> updateJobOffer(
