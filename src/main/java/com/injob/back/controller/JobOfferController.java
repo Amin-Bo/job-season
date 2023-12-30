@@ -37,7 +37,7 @@ public class JobOfferController {
         return new ResponseEntity<>(jobOfferList, HttpStatus.OK);
     }
 
-    @PatchMapping("/{jobId}")
+    @PutMapping("/{jobId}")
     @hasAdminRole
 
     public ResponseEntity<JobOfferDto> updateJobOffer(

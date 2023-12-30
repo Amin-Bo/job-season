@@ -1,8 +1,10 @@
 package com.injob.back.service.impl;
 
 import com.injob.back.dto.JobApplyDto;
+import com.injob.back.dto.JobOfferDto;
 import com.injob.back.enums.StatusEnum;
 import com.injob.back.mapper.JobApplyMapper;
+import com.injob.back.mapper.JobOfferMapper;
 import com.injob.back.model.JobApply;
 import com.injob.back.model.JobOffer;
 import com.injob.back.repository.JobApplyRepository;
@@ -25,6 +27,8 @@ public class JobApplyServiceImpl {
     private final JobApplyRepository jobApplyRepository;
     private final JobOfferRepository jobOfferRepository;
     private final JobApplyMapper jobApplyMapper;
+    private final JobOfferMapper jobOfferMapper;
+    private final JobOfferServiceImpl jobOfferService;
 
     public JobApplyDto addJobApply( Long jobOfferId) {
         // Retrieve the corresponding JobOffer
@@ -92,5 +96,15 @@ public class JobApplyServiceImpl {
     }
 
 
+    public List<JobApplyDto> getJobAppliesByJobOffer(Long jobOfferId) {
+        JobOfferDto jobOffer = jobOfferService.getJobOfferById(jobOfferId);
+        List<JobApply> jobApplies;
+
+        jobApplies = jobApplyRepository.findByJobOffer(jobOfferMapper.toJobOffer(jobOffer));
+
+        return jobApplies.stream()
+                .map(jobApplyMapper::jobApplyToDto)
+                .collect(Collectors.toList());
+    }
 
 }

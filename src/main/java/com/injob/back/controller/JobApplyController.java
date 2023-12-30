@@ -22,33 +22,44 @@ public class JobApplyController {
 
     @PostMapping("/add/{jobOfferId}")
     @hasUserRole
-    public ResponseEntity<JobApplyDto> addJobApply( @PathVariable Long jobOfferId) {
-            JobApplyDto addedJobApply = jobApplyService.addJobApply( jobOfferId);
-            return new ResponseEntity<>(addedJobApply, HttpStatus.CREATED);
+    public ResponseEntity<JobApplyDto> addJobApply(@PathVariable Long jobOfferId) {
+        JobApplyDto addedJobApply = jobApplyService.addJobApply(jobOfferId);
+        return new ResponseEntity<>(addedJobApply, HttpStatus.CREATED);
 
     }
+
     @PatchMapping("/update-status/{jobApplyId}")
     @hasAdminRole
     public ResponseEntity<JobApplyDto> updateJobApplyStatus(
             @PathVariable Long jobApplyId,
             @RequestParam StatusEnum newStatus) {
 
-            JobApplyDto updatedJobApply = jobApplyService.updateJobApplyStatus(jobApplyId, newStatus);
-            return ResponseEntity.ok(updatedJobApply);
+        JobApplyDto updatedJobApply = jobApplyService.updateJobApplyStatus(jobApplyId, newStatus);
+        return ResponseEntity.ok(updatedJobApply);
 
     }
 
     @GetMapping("/{jobApplyId}")
     public ResponseEntity<JobApplyDto> getJobApplyById(@PathVariable Long jobApplyId) {
 
-             JobApplyDto jobApplyDto = jobApplyService.getJobApplyById(jobApplyId);
-            return new ResponseEntity<>(jobApplyDto, HttpStatus.OK);
+        JobApplyDto jobApplyDto = jobApplyService.getJobApplyById(jobApplyId);
+        return new ResponseEntity<>(jobApplyDto, HttpStatus.OK);
 
     }
+
     @GetMapping("/all")
     public ResponseEntity<List<JobApplyDto>> getAllJobApplies() {
 
         List<JobApplyDto> jobApplies = jobApplyService.getAllJobApplies();
         return new ResponseEntity<>(jobApplies, HttpStatus.OK);
+    }
+
+    @GetMapping("/joboffer/{jobOfferId}")
+    @hasAdminRole
+    public ResponseEntity<List<JobApplyDto>> getJobAppliesByJobOffer(@PathVariable Long jobOfferId) {
+
+        List<JobApplyDto> jobApplies = jobApplyService.getJobAppliesByJobOffer(jobOfferId);
+        return new ResponseEntity<>(jobApplies, HttpStatus.OK);
+
     }
 }
