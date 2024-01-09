@@ -54,7 +54,7 @@ class SecurityConfig {
             http.authorizeHttpRequests()
                     .requestMatchers(SWAGGER_WHITELIST).permitAll()
                     .anyRequest()
-                    .permitAll();
+                    .authenticated();
             http.oauth2ResourceServer()
                     .jwt()
                     .jwtAuthenticationConverter(jwtAuthConverter);
