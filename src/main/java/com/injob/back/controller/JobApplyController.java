@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @SecurityRequirement(name = "basicAuth")
 public class JobApplyController {
-    private final JobApplyServiceImpl jobApplyService;
+  /*  private final JobApplyServiceImpl jobApplyService;
 
     @PostMapping("/add/{jobOfferId}")
     @hasUserRole
@@ -62,4 +62,6 @@ public class JobApplyController {
         return new ResponseEntity<>(jobApplies, HttpStatus.OK);
 
     }
+
+   */
 }
