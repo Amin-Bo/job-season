@@ -29,7 +29,7 @@ public class JobApply {
     @Column(name = "date_envoi", nullable = false)
     private LocalDateTime dateEnvoi;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String coverLettre;
 
     @Column(nullable = false)
