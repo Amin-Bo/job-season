@@ -29,6 +29,15 @@ public class JobApply {
     @Column(name = "date_envoi", nullable = false)
     private LocalDateTime dateEnvoi;
 
+    @Column(nullable = false)
+    private String coverLettre;
+
+    @Column(nullable = false)
+    private String yearsofProfessionnalExperience;
+
+    @Column(nullable = false)
+    private String educationDegree;
+
     @OneToMany(mappedBy = "jobApply", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Interview> interviews;
 }

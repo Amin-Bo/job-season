@@ -18,7 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 @SecurityRequirement(name = "basicAuth")
 public class FreeApplicationController {
-/*
     private final FreeApplicationServiceImpl freeApplicationService;
 
     @hasUserRole
@@ -50,5 +49,4 @@ public class FreeApplicationController {
         List<FreeApplicationDto> freeApplications = freeApplicationService.getAllFreeApplications();
         return ResponseEntity.ok(freeApplications);
     }
-*/
 }

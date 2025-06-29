@@ -18,12 +18,12 @@ import java.util.List;
 @AllArgsConstructor
 @SecurityRequirement(name = "basicAuth")
 public class JobApplyController {
-  /*  private final JobApplyServiceImpl jobApplyService;
+    private final JobApplyServiceImpl jobApplyService;
 
     @PostMapping("/add/{jobOfferId}")
     @hasUserRole
-    public ResponseEntity<JobApplyDto> addJobApply(@PathVariable Long jobOfferId) {
-        JobApplyDto addedJobApply = jobApplyService.addJobApply(jobOfferId);
+    public ResponseEntity<JobApplyDto> addJobApply(@PathVariable Long jobOfferId,  @RequestBody JobApplyRequestDtoo jobApplyRequestDtoo) {
+        JobApplyDto addedJobApply = jobApplyService.addJobApply(jobOfferId,jobApplyRequestDtoo);
         return new ResponseEntity<>(addedJobApply, HttpStatus.CREATED);
 
     }
@@ -63,5 +63,4 @@ public class JobApplyController {
 
     }
 
-   */
 }

@@ -1,5 +1,6 @@
 package com.injob.back.service.impl;
 
+import com.injob.back.controller.JobApplyRequestDtoo;
 import com.injob.back.dto.JobApplyDto;
 import com.injob.back.dto.JobOfferDto;
 import com.injob.back.enums.StatusEnum;
@@ -30,27 +31,31 @@ public class JobApplyServiceImpl {
     private final JobOfferMapper jobOfferMapper;
     private final JobOfferServiceImpl jobOfferService;
 
-    public JobApplyDto addJobApply( Long jobOfferId) {
+    public JobApplyDto addJobApply(Long jobOfferId, JobApplyRequestDtoo jobApplyRequestDto) {
         // Retrieve the corresponding JobOffer
         Optional<JobOffer> optionalJobOffer = jobOfferRepository.findById(jobOfferId);
         if (optionalJobOffer.isPresent()) {
             JobOffer jobOffer = optionalJobOffer.get();
-            JobApply jobApply= new  JobApply();
+            JobApply jobApply = new JobApply();
             // Set the JobOffer in the JobApply
             jobApply.setJobOffer(jobOffer);
             jobApply.setStatus(StatusEnum.PENDING);
             String jobSeekerEmail = AuthenticationUtils.getEmailFromCurrentAuthentication();
             jobApply.setEmail(jobSeekerEmail);
             jobApply.setDateEnvoi(LocalDateTime.now());
-            boolean exist = jobApplyRepository.existsByJobOfferIdAndEmail(jobOfferId,jobSeekerEmail);
-            if(exist){
-                throw new IllegalArgumentException("You have already applied for the current JobOffer.");
 
-            }
-            else {
+            // Set the additional data from the request DTO
+            jobApply.setCoverLettre(jobApplyRequestDto.getCoverLettre());
+            jobApply.setYearsofProfessionnalExperience(jobApplyRequestDto.getYearsofProfessionnalExperience());
+            jobApply.setEducationDegree(jobApplyRequestDto.getEducationDegree());
+
+            // Check if the job application already exists
+            boolean exist = jobApplyRepository.existsByJobOfferIdAndEmail(jobOfferId, jobSeekerEmail);
+            if (exist) {
+                throw new IllegalArgumentException("You have already applied for the current JobOffer.");
+            } else {
                 return jobApplyMapper.jobApplyToDto(jobApplyRepository.save(jobApply));
             }
-            // Save the JobApply
         } else {
             throw new IllegalArgumentException("JobOffer with ID " + jobOfferId + " not found.");
         }

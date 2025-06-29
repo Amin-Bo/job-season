@@ -13,6 +13,9 @@ public class JobApplyDto {
     private StatusEnum status= StatusEnum.PENDING;
     private String email;
     private String jobDescription;
+    private String coverLettre;
+    private String yearsofProfessionnalExperience;
+    private String educationDegree;
 
     @JsonProperty(value = "date_envoi",defaultValue = "2023-12-25T18:14:34.017Z")
     private String dateEnvoi;

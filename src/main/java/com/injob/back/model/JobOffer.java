@@ -21,7 +21,7 @@ public class JobOffer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "date_publication", nullable = false)
@@ -39,4 +39,7 @@ public class JobOffer {
 
     @OneToMany(mappedBy = "jobOffer", cascade = CascadeType.ALL)
     private List<JobApply> jobApplies;
+
+    @Column(name = "companyEmail", nullable = false)
+    private String companyEmail;
 }

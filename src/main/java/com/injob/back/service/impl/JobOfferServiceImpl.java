@@ -5,8 +5,8 @@ import com.injob.back.mapper.JobOfferMapper;
 import com.injob.back.model.JobOffer;
 import com.injob.back.repository.JobOfferRepository;
 import com.injob.back.service.JobOfferService;
+import com.injob.back.utils.AuthenticationUtils;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,11 +26,16 @@ public class JobOfferServiceImpl implements JobOfferService {
 
     public JobOfferDto addJobOffer(JobOfferDto jobOffer) {
         JobOffer givenJobOffer = jobOfferMapper.toJobOffer(jobOffer);
+        givenJobOffer.setCompanyEmail(AuthenticationUtils.getEmailFromCurrentAuthentication());
         JobOffer newJobOffer  = jobOfferRepository.save(givenJobOffer);
         return jobOfferMapper.jobOfferToDto(newJobOffer);
     }
 
     public List<JobOfferDto> jobOfferList() {
+        if(AuthenticationUtils.isAdmin()){
+            return jobOfferRepository.findJobOfferByCompanyEmail(AuthenticationUtils.getEmailFromCurrentAuthentication()).stream().map(jobOfferMapper::jobOfferToDto).collect(Collectors.toList());
+        }
+        AuthenticationUtils.getCurrentAuthentication().getPrincipal();
         return jobOfferRepository.findAll().stream().map(jobOfferMapper::jobOfferToDto).collect(Collectors.toList());
     }
 

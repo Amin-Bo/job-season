@@ -1,9 +1,7 @@
 package com.injob.back.mapper;
 
 import com.injob.back.dto.JobApplyDto;
-import com.injob.back.dto.JobOfferDto;
 import com.injob.back.model.JobApply;
-import com.injob.back.model.JobOffer;
 import com.injob.back.utils.DateUtils;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -17,6 +15,9 @@ public interface JobApplyMapper {
 
     @Mapping(source = "dateEnvoi", target = "dateEnvoi", qualifiedByName = "formatLocalDateTime")
     @Mapping(source = "jobOffer.description", target = "jobDescription")
+    @Mapping(source = "coverLettre", target = "coverLettre")
+    @Mapping(source = "yearsofProfessionnalExperience", target = "yearsofProfessionnalExperience")
+    @Mapping(source = "educationDegree", target = "educationDegree")
     JobApplyDto jobApplyToDto(JobApply jobApply);
     @Mapping(source = "dateEnvoi", target = "dateEnvoi", qualifiedByName = "formatStringDate")
     JobApply toJobApply(JobApplyDto jobApplyDto);

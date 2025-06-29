@@ -19,7 +19,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @SecurityRequirement(name = "basicAuth")
 public class InterviewController {
-/*
     private final InterviewServiceImpl interviewService;
 
     @PostMapping("/add/{jobApplyId}")
@@ -62,6 +61,4 @@ public class InterviewController {
         List<InterviewDto> interviews = interviewService.getAllInterviews();
         return ResponseEntity.ok(interviews);
     }
-
- */
 }
