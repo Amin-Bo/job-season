@@ -50,7 +50,9 @@ class SecurityConfig {
         try {
             log.info("HTTP SECURITY " + http);
             log.info("Configuring security filters...");
-
+http.csrf(csrf -> csrf
+    .ignoringRequestMatchers("/chat")
+);
             http.authorizeHttpRequests()
                     .requestMatchers(SWAGGER_WHITELIST).permitAll()
                     .anyRequest()
